@@ -24,3 +24,7 @@ echo ""
 # commands to display a title
 # commands to make a list of the 12 biggest files
 # sort/format whatever to display the list properly
+echo "12 Largest Files:"
+echo "==============="
+find / -type f -exec du -h {} + 2>/dev/null | sort -h -r| head -n 12
+echo ""
