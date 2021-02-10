@@ -30,3 +30,5 @@ echo "Rolling...
 $((RANDOM % range + bnumber))
 Rolled."
 echo ""
+
+#Task 2:
