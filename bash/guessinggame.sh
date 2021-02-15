@@ -25,6 +25,24 @@ secretnumber=$(($RANDOM % 10 +1)) # save our secret number to compare later
 read -p "Give me a number from 1 to 10: " userguess # ask for a guess
 while [ $userguess != $secretnumber ]; do # ask repeatedly until they get it right
   read -p "Give me a number from 1 to 10: " userguess # ask for another guess
+#done
+#echo "You got it! Have a milkdud."
+while [ -z "$userguess" ];
+  do
+    read -p "Give me a number from 1 to 10: " userguess
 done
-echo "You got it! Have a milkdud."
+ if [ $userguess -le 10 ] && [ $userguess -gt 1 ]
+ then
+   if [ "$userguess" -gt "$secretnumber" ]
+   then
+     echo "Sorry The number you guesed is HIGH"
+   elif [ "$userguess" -lt "$secretnumber" ]
+   then
+     echo "Sorry The number you guesed is LOW"
+   else
+     echo "You got it! Have a milkdud."
+     exit
+   fi
 
+ fi
+done
