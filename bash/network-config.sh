@@ -75,11 +75,50 @@
 #   External IP     : $myExternalIP
 #   External Name   : $myExternalName
 
-cat <<EOF
-Hostname        : $(hostname)
-LAN Address     : $(ip a s $(ip a |awk '/: e/{gsub(/:/,"");print $2}')|awk '/inet /{gsub(/\/.*/,"");print $2}')
-LAN Hostname    : $(getent hosts $(ip a s $(ip a |awk '/: e/{gsub(/:/,"");print $2}')|awk '/inet /{gsub(/\/.*/,"");print $2}')| awk '{print $2}')
-External IP     : $(curl -s icanhazip.com)
-External Name   : $(getent hosts $(curl -s icanhazip.com) | awk '{print $2}')
-EOF
+### VARIABLES ###
 
+# TASK ONE - Output changed to variables
+
+# uses hostname command to find hostname and assigns to variable
+hostname=$(hostname)
+# uses ip a command to list network information, uses awk to find the interface name.
+# replaces colon in interface name with nothing and assigns to variable.
+interfaceName=$(ip a | awk '/: e/{gsub(/:/,"");print $2}')
+# uses ip command, interfaceName and awk to find the ip address.
+# replaces netmask with nothing and assigns to variable.
+lanIP=$(ip a s $interfaceName | awk '/inet /{gsub(/\/.*/,"");print $2}')
+# uses ip address and awk to find the right lan hostname and assigns to variable
+lanHost=$(getent hosts $lanIP | awk '{print $2}')
+# uses curl command to find externap ip address and assigns to variable
+externalIP=$(curl -s icanhazip.com)
+# uses external ip address and awk to find the external name and assigns to variable
+externalName=$(getent hosts $externalIP | awk '{print $2}')
+
+# TASK TWO - added router ip & name variables
+
+# uses command ip r (route) to list information, awk to find router ip addresses.
+# replaces netmask with nothing and assigns to variable.
+routerIP=$(ip r | awk '/def/{gsub(/\/.*/,"");print $3}')
+#uses routerIP and awk to find the router name
+routerName=$(getent hosts $routerIP | awk '{print $2}')
+
+### OUTPUT ###
+
+#cat <<EOF
+#Hostname        : $(hostname)
+#LAN Address     : $(ip a s $(ip a |awk '/: e/{gsub(/:/,"");print $2}')|awk '/inet /{gsub(/\/.*/,"");print $2}')
+#LAN Hostname    : $(getent hosts $(ip a s $(ip a |awk '/: e/{gsub(/:/,"");print $2}')|awk '/inet /{gsub(/\/.*/,"");print $2}')| awk '{print $2}')
+#External IP     : $(curl -s icanhazip.com)
+#External Name   : $(getent hosts $(curl -s icanhazip.com) | awk '{print $2}')
+#EOF
+
+# cat command, calling variables to show output
+cat <<EOF
+Hostname        : $hostname
+LAN Address     : $lanIP
+LAN Hostname    : $lanHost
+External IP     : $externalIP
+External Name   : $externalName
+Router IP       : $routerIP
+Router Name     : $routerName
+EOF
