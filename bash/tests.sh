@@ -4,20 +4,31 @@
 # This section demonstrates file testing
 
 # Test for the existence of the /etc/resolv.conf file
+echo "Test for the existence of the /etc/resolv.conf file"
+test -e /etc/resolv.conf && echo "/etc/resolv.conf exists" || echo "/etc/resolv.conf does not exist"
 # TASK 1: Add a test to see if the /etc/resolv.conf file is a regular file
+test -f /etc/resolv.conf && echo "/etc/resolv.conf file is a regular file" || echo "/etc/resolv.conf file is not a regular file"
 # TASK 2: Add a test to see if the /etc/resolv.conf file is a symbolic link
+test -h /etc/resolv.conf && echo "/etc/resolv.conf file is a symbolic link" || echo "/etc/resolv.conf file is not a symbolic link"
 # TASK 3: Add a test to see if the /etc/resolv.conf file is a directory
+test -d /etc/resolv.conf && echo "/etc/resolv.conf file is a directory" || echo "/etc/resolv.conf file is not a directory"
 # TASK 4: Add a test to see if the /etc/resolv.conf file is readable
+test -r /etc/resolv.conf && echo "/etc/resolv.conf file is readable" || echo "/etc/resolv.conf file is not readable"
 # TASK 5: Add a test to see if the /etc/resolv.conf file is writable
+test -w /etc/resolv.conf && echo "/etc/resolv.conf file is writable" || echo "/etc/resolv.conf file is not writable"
 # TASK 6: Add a test to see if the /etc/resolv.conf file is executable
 test -e /etc/resolv.conf && echo "/etc/resolv.conf exists" || echo "/etc/resolv.conf does not exist"
-
+echo " "
 # Tests if /tmp is a directory
 # TASK 4: Add a test to see if the /tmp directory is readable
 # TASK 5: Add a test to see if the /tmp directory is writable
 # TASK 6: Add a test to see if the /tmp directory can be accessed
+echo "Tests if /tmp is a directory "
 [ -d /tmp ] && echo "/tmp is a directory" || echo "/tmp is not a directory"
-
+[ -r /tmp ] && echo "/tmp directory is readable" || echo "/tmp directory is Not readable"
+[ -w /tmp ] && echo "/tmp directory is writable" || echo "/tmp directory is Not writable"
+[ -x /tmp ] && echo "/tmp directory can be accessed" || echo "/tmp directory can Not be accessed"
+echo " "
 # Tests if one file is newer than another
 # TASK 7: Add testing to print out which file newest, or if they are the same age
 [ /etc/hosts -nt /etc/resolv.conf ] && echo "/etc/hosts is newer than /etc/resolv.conf"
