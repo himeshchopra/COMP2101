@@ -92,7 +92,7 @@ lanHost=$(getent hosts $lanIP | awk '{print $2}')
 # uses curl command to find externap ip address and assigns to variable
 externalIP=$(curl -s icanhazip.com)
 # uses external ip address and awk to find the external name and assigns to variable
-externalName=$(getent hosts $externalIP | awk '{print $2}')
+externalName=$(getent hosts $(curl -s icanhazip.com) | awk '{print $2}')
 
 # TASK TWO - added router ip & name variables
 
