@@ -15,18 +15,18 @@
 # Usage:
 #   error-message ["some text to print to stderr"]
 function error-message {
-
+echo "error"
 }
 
 # This function will send a message to stderr and exit with a failure status
 # Usage:
 #   error-exit ["some text to print to stderr" [exit-status]]
 function error-exit {
-
+echo "hello"
 }
 #This function displays help information if the user asks for it on the command line or gives us a bad command line
 function displayhelp {
-
+echo "help"
 }
 
 # This function will remove all the temp files created by the script
