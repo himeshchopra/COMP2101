@@ -43,7 +43,7 @@ trap "rm -f *.tmp" EXIT
 #This function produces the network configuration for our report
 function getipinfo {
   # reuse our netid.sh script from lab 4
-  ./netid.sh
+  netid.sh
 }
 
 # process command line options
