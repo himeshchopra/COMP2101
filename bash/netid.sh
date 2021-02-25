@@ -26,10 +26,24 @@
 # the first part is run once to get information about the host
 # grep is used to filter ip command output so we don't have extra junk in our output
 # stream editing with sed and awk are used to extract only the data we want displayed
-
+getopts ":i:v" option ;
+ision=0
+vison=0
+case "$option" in
+       i)
+           echo "interactive mode set"
+           ision=1 ;;
+       v)
+           echo "verbose mode"
+           vison=1 ;;
+       *)
+           exit 1 ;;
+   esac
 #####
 # Once per host report
 #####
+if [ "$vison" == 1 ]
+then
 [ "$verbose" = "yes" ] && echo "Gathering host information"
 # we use the hostname command to get our system name
 my_hostname=$(hostname)
@@ -56,7 +70,7 @@ External IP   : $external_address
 External Name : $external_name
 
 EOF
-
+fi
 #####
 # End of Once per host report
 #####
