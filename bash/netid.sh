@@ -26,18 +26,15 @@
 # the first part is run once to get information about the host
 # grep is used to filter ip command output so we don't have extra junk in our output
 # stream editing with sed and awk are used to extract only the data we want displayed
-getopts ":i:v" option ;
+getopts ":v" option ;
 ision=0
 vison=0
 case "$option" in
-       i)
-           echo "interactive mode set"
-           ision=1 ;;
+
        v)
            echo "verbose mode"
            vison=1 ;;
-       *)
-           exit 1 ;;
+
    esac
 #####
 # Once per host report
@@ -70,7 +67,7 @@ External IP   : $external_address
 External Name : $external_name
 
 EOF
-fi
+
 #####
 # End of Once per host report
 #####
@@ -84,9 +81,9 @@ fi
 #####
 # Per-interface report
 #####
-
+else
 # define the interface being summarized
-interface="eno1"
+interface="$option"
 [ "$verbose" = "yes" ] && echo "Reporting on interface(s): $interface"
 
 [ "$verbose" = "yes" ] && echo "Getting IPV4 address and name for interface $interface"
@@ -117,3 +114,4 @@ EOF
 #####
 # End of per-interface report
 #####
+fi
