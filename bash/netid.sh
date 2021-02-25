@@ -27,19 +27,19 @@
 # grep is used to filter ip command output so we don't have extra junk in our output
 # stream editing with sed and awk are used to extract only the data we want displayed
 getopts ":v" option ;
-ision=0
-vison=0
+
+vis=0
 case "$option" in
 
        v)
-           echo "verbose mode"
-           vison=1 ;;
+
+           vis=1 ;;
 
    esac
 #####
 # Once per host report
 #####
-if [ "$vison" == 1 ]
+if [ "$vis" == 1 ]
 then
 [ "$verbose" = "yes" ] && echo "Gathering host information"
 # we use the hostname command to get our system name
@@ -83,7 +83,7 @@ EOF
 #####
 else
 # define the interface being summarized
-interface="$option"
+interface="$1"
 [ "$verbose" = "yes" ] && echo "Reporting on interface(s): $interface"
 
 [ "$verbose" = "yes" ] && echo "Getting IPV4 address and name for interface $interface"
